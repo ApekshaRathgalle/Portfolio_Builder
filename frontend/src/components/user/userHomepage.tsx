@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { User } from 'lucide-react';
-import UserNavbar from "./userNavbar"; 
+
 
 // Type definitions matching the form data
 interface PortfolioData {
@@ -60,7 +60,7 @@ const UserHomepage: React.FC<UserHomepageProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">
-      <UserNavbar /> {/* <-- Add the navbar here */}
+     
       
       <div className="max-w-7xl mx-auto px-6 py-12">
         

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import PortfolioForm from './components/Form';
+import UserLayout from './components/user/userLayout';
 import UserHomepage from './components/user/userHomepage';
 import UserAboutPage from './components/user/userAbout';
 import UserSkillsPage from './components/user/userSkills';
@@ -13,11 +14,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/form" element={<PortfolioForm />} />
-        <Route path="/user" element={<UserHomepage />} />
-        <Route path="/user/about" element={<UserAboutPage />} />
-        <Route path="/user/skills" element={<UserSkillsPage />} />
-        <Route path="/user/projects" element={<UserProjectPage />} />
-        <Route path="/user/contact" element={<UserContactPage />} />
+        <Route path="/user" element={<UserLayout />}>
+          <Route index element={<UserHomepage />} />
+          <Route path="about" element={<UserAboutPage />} />
+          <Route path="skills" element={<UserSkillsPage />} />
+          <Route path="projects" element={<UserProjectPage />} />
+          <Route path="contact" element={<UserContactPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Code2, Globe, Award, Star, StarHalf } from 'lucide-react';
-import UserNavbar from "./userNavbar";
+
 
 // Type definitions for the data structures
 interface TechnicalSkill {
@@ -105,7 +105,7 @@ const UserSkillsPage: React.FC<UserSkillsPageProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">
-      <UserNavbar />
+     
       
       <div className="max-w-6xl mx-auto px-6 py-12">
         

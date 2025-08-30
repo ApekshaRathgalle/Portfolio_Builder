@@ -1,5 +1,4 @@
 import React from "react";
-import UserNavbar from "./userNavbar";
 import { Mail, Phone, MapPin, Linkedin, Github, Globe, Twitter } from "lucide-react";
 
 interface UserContactPageProps {
@@ -29,7 +28,7 @@ const UserContactPage: React.FC<UserContactPageProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">
-      <UserNavbar />
+      
       <div className="max-w-3xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="text-center mb-12">

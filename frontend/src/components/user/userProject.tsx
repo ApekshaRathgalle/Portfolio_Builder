@@ -1,5 +1,4 @@
 import React from "react";
-import UserNavbar from "./userNavbar";
 import { FolderGit2, Link2, Code2 } from "lucide-react";
 
 // Match Form.tsx project structure
@@ -25,7 +24,7 @@ const UserProjectPage: React.FC<UserProjectPageProps> = ({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">
-      <UserNavbar />
+      
       <div className="max-w-6xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="text-center mb-16">

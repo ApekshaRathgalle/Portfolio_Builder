@@ -1,5 +1,6 @@
-import { div } from 'framer-motion/client';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PortfolioContext } from './user/PortfolioContext';
 
 // Type definitions
 interface Education {
@@ -24,28 +25,8 @@ interface Project {
   tech: string;
 }
 
-interface PortfolioData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  location: string;
-  title: string;
-  bio: string;
-  skills: string;
-  languages: string;
-  certifications: string;
-  linkedin: string;
-  github: string;
-  website: string;
-  twitter: string;
-  education: Education[];
-  experience: Experience[];
-  projects: Project[];
-}
-
 const PortfolioForm: React.FC = () => {
-  const [formData, setFormData] = useState<PortfolioData>({
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -81,9 +62,13 @@ const PortfolioForm: React.FC = () => {
     }]
   });
 
-  const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
 
-  const handleInputChange = (field: keyof PortfolioData, value: string) => {
+
+  const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
+  const { setPortfolioData } = useContext(PortfolioContext)!;
+  const navigate = useNavigate();
+
+  const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -138,11 +123,20 @@ const PortfolioForm: React.FC = () => {
     }
   };
 
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-    console.log('Profile Photo:', profilePhoto);
-    alert('Portfolio form submitted! Check console for data.');
+    if (profilePhoto) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPortfolioData({ ...formData, profilePhoto: reader.result as string });
+        navigate('/user');
+      };
+      reader.readAsDataURL(profilePhoto);
+    } else {
+      setPortfolioData({ ...formData, profilePhoto: undefined });
+      navigate('/user');
+    }
   };
 
   return (
@@ -160,7 +154,8 @@ const PortfolioForm: React.FC = () => {
 
         {/* Form Card */}
 <div className="border border-purple-500/20 rounded-3xl p-10 shadow-2xl">
-  <form onSubmit={handleSubmit} className="space-y-10">
+          <form onSubmit={handleSubmit} className="space-y-10">
+          
             
             {/* Personal Information */}
             <section>
