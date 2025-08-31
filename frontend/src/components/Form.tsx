@@ -134,19 +134,33 @@ const PortfolioForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
-  const saveData = (resumeBase64?: string) => {
-    setPortfolioData({ ...formData, profilePhoto: profilePhoto ? profilePhoto.name : undefined, resume: resumeBase64 });
+  const saveData = (profilePhotoBase64?: string, resumeBase64?: string) => {
+    setPortfolioData({ ...formData, profilePhoto: profilePhotoBase64, resume: resumeBase64 });
     navigate('/user');
   };
 
-  if (resumeFile) {
+  if (profilePhoto) {
     const reader = new FileReader();
     reader.onloadend = () => {
-      saveData(reader.result as string);
+      if (resumeFile) {
+        const resumeReader = new FileReader();
+        resumeReader.onloadend = () => {
+          saveData(reader.result as string, resumeReader.result as string);
+        };
+        resumeReader.readAsDataURL(resumeFile);
+      } else {
+        saveData(reader.result as string, undefined);
+      }
     };
-    reader.readAsDataURL(resumeFile);
+    reader.readAsDataURL(profilePhoto);
+  } else if (resumeFile) {
+    const resumeReader = new FileReader();
+    resumeReader.onloadend = () => {
+      saveData(undefined, resumeReader.result as string);
+    };
+    resumeReader.readAsDataURL(resumeFile);
   } else {
-    saveData(undefined);
+    saveData(undefined, undefined);
   }
 };
 
