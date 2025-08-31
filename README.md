@@ -23,32 +23,10 @@ Portfolio Builder is a modern, responsive web app for creating professional port
 - [Lucide Icons](https://lucide.dev/)
 
 
-## Deployment
+3. **Deployed on Vercel:**
+-https://portfolio-builder-three-zeta.vercel.app/
 
-### Vercel
-https://portfolio-builder-three-zeta.vercel.app/
-
-1. **Build the project:**
-
-   ```sh
-   npm run build
-   ```
-
-2. **Add a `_redirects` file for React Router:**
-
-   Create `public/_redirects` with:
-
-   ```
-   /*    /index.html   200
-   ```
-
-3. **Deploy:**
-
-   - Push your code to GitHub.
-   - Connect your repo on [Netlify](https://app.netlify.com/).
-   - Set build command: `npm run build`
-   - Set publish directory: `frontend/dist`
-   - Add your Firebase environment variables in Netlify dashboard.
+   
 
 
 
