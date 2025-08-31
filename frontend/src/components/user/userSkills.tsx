@@ -1,5 +1,24 @@
 import React, { useContext } from 'react';
-import { Code2, Globe, Award, Star } from 'lucide-react';
+import { 
+  Code2, 
+  Globe, 
+  Award, 
+  Star, 
+  Database,
+  GitBranch,
+  Cloud,
+  Server,
+  Smartphone,
+  Monitor,
+  Zap,
+  Settings,
+  FileCode,
+  Terminal,
+  Box,
+  Layers
+} from 'lucide-react';
+
+// Import the actual PortfolioContext
 import { PortfolioContext } from './PortfolioContext';
 
 const UserSkillsPage: React.FC = () => {
@@ -14,27 +33,27 @@ const UserSkillsPage: React.FC = () => {
 
   const getSkillIcon = (skillName: string) => {
     const skill = skillName.toLowerCase();
-    if (skill.includes('javascript') || skill.includes('js')) return '⚡';
-    if (skill.includes('python')) return '🐍';
-    if (skill.includes('react')) return '⚛️';
-    if (skill.includes('node')) return '🟢';
-    if (skill.includes('html')) return '🌐';
-    if (skill.includes('css')) return '🎨';
-    if (skill.includes('java')) return '☕';
-    if (skill.includes('php')) return '🐘';
-    if (skill.includes('sql') || skill.includes('database')) return '🗄️';
-    if (skill.includes('git')) return '📦';
-    if (skill.includes('docker')) return '🐳';
-    if (skill.includes('aws')) return '☁️';
-    if (skill.includes('linux')) return '🐧';
-    if (skill.includes('typescript')) return '📘';
-    if (skill.includes('angular')) return '🅰️';
-    if (skill.includes('vue')) return '💚';
-    if (skill.includes('mongodb')) return '🍃';
-    if (skill.includes('redis')) return '🔴';
-    if (skill.includes('kubernetes')) return '⚓';
-    if (skill.includes('firebase')) return '🔥';
-    return '⚙️';
+    
+    // Return appropriate Lucide React icon component
+    if (skill.includes('javascript') || skill.includes('js')) return <Zap className="w-6 h-6 text-yellow-400" />;
+    if (skill.includes('python')) return <FileCode className="w-6 h-6 text-blue-400" />;
+    if (skill.includes('react')) return <Layers className="w-6 h-6 text-cyan-400" />;
+    if (skill.includes('node')) return <Server className="w-6 h-6 text-green-400" />;
+    if (skill.includes('html')) return <Monitor className="w-6 h-6 text-orange-400" />;
+    if (skill.includes('css')) return <Monitor className="w-6 h-6 text-blue-500" />;
+    if (skill.includes('java')) return <FileCode className="w-6 h-6 text-red-400" />;
+    if (skill.includes('php')) return <Server className="w-6 h-6 text-purple-400" />;
+    if (skill.includes('sql') || skill.includes('database') || skill.includes('mongodb') || skill.includes('redis')) return <Database className="w-6 h-6 text-green-500" />;
+    if (skill.includes('git')) return <GitBranch className="w-6 h-6 text-orange-500" />;
+    if (skill.includes('docker') || skill.includes('kubernetes')) return <Box className="w-6 h-6 text-blue-500" />;
+    if (skill.includes('aws') || skill.includes('cloud') || skill.includes('firebase')) return <Cloud className="w-6 h-6 text-blue-400" />;
+    if (skill.includes('linux')) return <Terminal className="w-6 h-6 text-gray-400" />;
+    if (skill.includes('typescript')) return <FileCode className="w-6 h-6 text-blue-600" />;
+    if (skill.includes('angular')) return <Layers className="w-6 h-6 text-red-500" />;
+    if (skill.includes('vue')) return <Layers className="w-6 h-6 text-green-500" />;
+    if (skill.includes('mobile') || skill.includes('android') || skill.includes('ios')) return <Smartphone className="w-6 h-6 text-gray-400" />;
+    
+    return <Settings className="w-6 h-6 text-gray-400" />;
   };
 
   const renderProficiencyStars = (proficiency: string) => {
@@ -61,6 +80,7 @@ const UserSkillsPage: React.FC = () => {
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-green-400 mx-auto rounded-full"></div>
         </div>
+        
         <div className="mb-16">
           <div className="flex items-center mb-8">
             <div className="p-3 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-xl mr-4">
@@ -71,9 +91,11 @@ const UserSkillsPage: React.FC = () => {
           {skillsArray.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {skillsArray.map((skill, index) => (
-                <div key={index} className="bg-slate-800/50 border border-slate-700 rounded-2xl p-6">
+                <div key={index} className="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 hover:bg-slate-700/50 transition-all duration-300 hover:border-slate-600">
                   <div className="flex items-center space-x-4">
-                    <div className="text-3xl">{getSkillIcon(skill)}</div>
+                    <div className="p-2 bg-slate-700/50 rounded-lg">
+                      {getSkillIcon(skill)}
+                    </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-white">{skill}</h3>
                     </div>
@@ -88,6 +110,7 @@ const UserSkillsPage: React.FC = () => {
             </div>
           )}
         </div>
+        
         <div className="mb-16">
           <div className="flex items-center mb-8">
             <div className="p-3 bg-gradient-to-r from-cyan-400 to-green-400 rounded-xl mr-4">
@@ -118,6 +141,7 @@ const UserSkillsPage: React.FC = () => {
             </div>
           )}
         </div>
+        
         <div className="mb-16">
           <div className="flex items-center mb-8">
             <div className="p-3 bg-gradient-to-r from-green-400 to-purple-400 rounded-xl mr-4">
