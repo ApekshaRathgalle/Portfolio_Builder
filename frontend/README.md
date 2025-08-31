@@ -1,69 +1,55 @@
-# React + TypeScript + Vite
+# Portfolio Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio Builder is a modern, responsive web app for creating professional portfolios. Built with **React**, **TypeScript**, **Vite**, **Tailwind CSS**, and **Firebase**, it allows users to sign in, fill out a customizable form, upload a profile photo and resume, and showcase their skills, projects, education, and more.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚡ **Fast & Responsive:** Built with Vite and Tailwind CSS for instant load and mobile-friendly design.
+- 🔒 **Authentication:** Sign in with email/password or Google using Firebase Auth.
+- 📝 **Customizable Portfolio:** Add personal info, education, experience, skills, languages, certifications, projects, and social links.
+- 📸 **Profile Photo & Resume Upload:** Upload a profile image and (optionally) a resume PDF.
+- 📤 **Download Resume:** Visitors can download your resume from your portfolio.
+- 🔗 **Shareable Portfolio Link:** Get a unique link to your portfolio after creation.
+- 🌈 **Beautiful UI:** Modern gradients, animated effects, and professional templates.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Firebase (Auth, Firestore, Storage)](https://firebase.google.com/)
+- [React Router](https://reactrouter.com/)
+- [Lucide Icons](https://lucide.dev/)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Deployment
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Vercel
+https://portfolio-builder-three-zeta.vercel.app/
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. **Build the project:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```sh
+   npm run build
+   ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. **Add a `_redirects` file for React Router:**
+
+   Create `public/_redirects` with:
+
+   ```
+   /*    /index.html   200
+   ```
+
+3. **Deploy:**
+
+   - Push your code to GitHub.
+   - Connect your repo on [Netlify](https://app.netlify.com/).
+   - Set build command: `npm run build`
+   - Set publish directory: `frontend/dist`
+   - Add your Firebase environment variables in Netlify dashboard.
+
+
+
+**Made with ❤️ using React, Vite, and Firebase**
