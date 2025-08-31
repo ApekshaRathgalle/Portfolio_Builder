@@ -5,7 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import port from '../assets/port.png';
 import AuthModal from './AuthPage';
-import {getFirestore , doc , getDoc} from "firebase/firestore"
+
 
 interface TypewriterProps {
   text: string;
@@ -71,18 +71,10 @@ const PortfolioBuilder: React.FC = () => {
     }
   };
 
-  const [userCount, setUserCount] = useState<number | null>(null);
+  const [userCount, setUserCount] = useState<number>(50000); // Example static value
 
-useEffect(() => {
-  const fetchUserCount = async () => {
-    const db = getFirestore();
-    const statsDoc = await getDoc(doc(db, "stats", "portfolioCount"));
-    if (statsDoc.exists()) {
-      setUserCount(statsDoc.data().count);
-    }
-  };
-  fetchUserCount();
-}, []);
+
+
 
   return (
     <div className={`min-h-screen transition-all duration-300 ${isDarkMode ? 'dark bg-gray-900' : 'bg-gradient-to-br from-green-50 via-purple-50 to-blue-50'}`}>
