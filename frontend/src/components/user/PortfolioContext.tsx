@@ -1,5 +1,7 @@
 import React, { createContext, useState } from "react";
 
+
+
 export interface PortfolioData {
   firstName: string;
   lastName: string;
@@ -18,7 +20,8 @@ export interface PortfolioData {
   education: any[];
   experience: any[];
   projects: any[];
-  profilePhoto?: string; // base64 string or URL
+  profilePhoto?: string; 
+  resume?: string;
 }
 
 interface PortfolioContextType {

@@ -1,30 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Mail, Phone, MapPin, Linkedin, Github, Globe, Twitter } from "lucide-react";
+import { PortfolioContext } from "./PortfolioContext";
 
-interface UserContactPageProps {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  location: string;
-  linkedin: string;
-  github: string;
-  website: string;
-  twitter: string;
-}
+const UserContactPage: React.FC = () => {
+  const { portfolioData } = useContext(PortfolioContext)!;
 
-const UserContactPage: React.FC<UserContactPageProps> = ({
-  firstName,
-  lastName,
-  email,
-  phone,
-  location,
-  linkedin,
-  github,
-  website,
-  twitter,
-}) => {
-  const fullName = `${firstName} ${lastName}`;
+  const fullName = `${portfolioData?.firstName || ''} ${portfolioData?.lastName || ''}`;
+  const email = portfolioData?.email || '';
+  const phone = portfolioData?.phone || '';
+  const location = portfolioData?.location || '';
+  const linkedin = portfolioData?.linkedin || '';
+  const github = portfolioData?.github || '';
+  const website = portfolioData?.website || '';
+  const twitter = portfolioData?.twitter || '';
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">

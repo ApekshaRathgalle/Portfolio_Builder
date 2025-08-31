@@ -1,26 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FolderGit2, Link2, Code2 } from "lucide-react";
+import { PortfolioContext } from "./PortfolioContext";
 
-// Match Form.tsx project structure
-interface Project {
-  title: string;
-  url: string;
-  description: string;
-  tech: string;
-}
 
-interface UserProjectPageProps {
-  firstName: string;
-  lastName: string;
-  projects: Project[];
-}
+const UserProjectPage: React.FC = () => {
+  const { portfolioData } = useContext(PortfolioContext)!;
 
-const UserProjectPage: React.FC<UserProjectPageProps> = ({
-  firstName,
-  lastName,
-  projects,
-}) => {
-  const fullName = `${firstName} ${lastName}`;
+  const fullName = `${portfolioData?.firstName || ''} ${portfolioData?.lastName || ''}`;
+  const projects = portfolioData?.projects || [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">

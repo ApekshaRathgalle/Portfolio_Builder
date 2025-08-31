@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import port from '../assets/port.png';
 import AuthModal from './AuthPage';
+import {getFirestore , doc , getDoc} from "firebase/firestore"
 
 interface TypewriterProps {
   text: string;
@@ -70,6 +71,19 @@ const PortfolioBuilder: React.FC = () => {
     }
   };
 
+  const [userCount, setUserCount] = useState<number | null>(null);
+
+useEffect(() => {
+  const fetchUserCount = async () => {
+    const db = getFirestore();
+    const statsDoc = await getDoc(doc(db, "stats", "portfolioCount"));
+    if (statsDoc.exists()) {
+      setUserCount(statsDoc.data().count);
+    }
+  };
+  fetchUserCount();
+}, []);
+
   return (
     <div className={`min-h-screen transition-all duration-300 ${isDarkMode ? 'dark bg-gray-900' : 'bg-gradient-to-br from-green-50 via-purple-50 to-blue-50'}`}>
       {/* Navigation */}
@@ -132,9 +146,9 @@ const PortfolioBuilder: React.FC = () => {
               4.9/5 Rating
             </div>
             <div className="flex items-center">
-              <Users className="w-5 h-5 text-blue-400 mr-2" />
-              50K+ Users
-            </div>
+  <Users className="w-5 h-5 text-blue-400 mr-2" />
+  {userCount !== null ? `${userCount} Users` : "Loading..."}
+</div>
           </div>
         </div>
         {/* Right Image */}

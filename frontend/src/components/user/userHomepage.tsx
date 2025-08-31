@@ -1,18 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { User } from 'lucide-react';
-
-
-// Type definitions matching the form data
-interface PortfolioData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  location: string;
-  title: string;
-  bio: string;
-  profilePhoto?: File | null;
-}
+import { PortfolioContext } from './PortfolioContext';
 
 interface TypewriterProps {
   text: string;
@@ -41,28 +29,28 @@ const Typewriter: React.FC<TypewriterProps> = ({ text, speed = 100 }) => {
   );
 };
 
-interface UserHomepageProps {
-  firstName: string;
-  lastName: string;
-  title: string;
-  profilePhoto?: string;
-  summary: string;
-}
+const UserHomepage: React.FC = () => {
+  const { portfolioData } = useContext(PortfolioContext)!;
 
-const UserHomepage: React.FC<UserHomepageProps> = ({
-  firstName,
-  lastName,
-  title,
-  profilePhoto,
-  summary,
-}) => {
-  const fullName = `${firstName} ${lastName}`;
+  const fullName = `${portfolioData?.firstName || ''} ${portfolioData?.lastName || ''}`;
+  const title = portfolioData?.title || '';
+  const summary = portfolioData?.bio || '';
+  const profilePhoto = portfolioData?.profilePhoto;
+
+const handleDownloadResume = () => {
+    if (portfolioData?.resume) {
+      const link = document.createElement('a');
+      link.href = portfolioData.resume;
+      link.download = 'resume.pdf';
+      link.click();
+    } else {
+      alert('No resume uploaded.');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">
-     
-      
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 pt-24 pb-12">
         
         {/* Main Hero Section */}
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 mb-16">
@@ -126,12 +114,13 @@ const UserHomepage: React.FC<UserHomepageProps> = ({
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-6">
-              <button className="px-8 py-4 bg-gradient-to-r from-purple-400 to-cyan-400 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5 transition-all">
-                Download Resume
-              </button>
-              <button className="px-8 py-4 border-2 border-purple-500/50 text-purple-400 font-semibold rounded-xl hover:bg-purple-500/10 hover:border-purple-400 transition-all">
-                View Portfolio
-              </button>
+              <button
+  onClick={handleDownloadResume}
+  className="px-8 py-4 bg-gradient-to-r from-purple-400 to-cyan-400 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5 transition-all"
+>
+  Download Resume
+</button>
+              
             </div>
           </div>
         </div>

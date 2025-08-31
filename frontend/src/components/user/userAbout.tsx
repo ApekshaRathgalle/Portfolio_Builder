@@ -1,52 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GraduationCap, Briefcase, Calendar, MapPin } from 'lucide-react';
-import UserNavbar from "./userNavbar";
+import { PortfolioContext } from './PortfolioContext';
 
-// Type definitions for the data structures
-interface Education {
-  id?: string;
-  institutionName: string;
-  degreeType: string;
-  fieldOfStudy: string;
-  graduationDate: string;
-}
 
-interface ProfessionalExperience {
-  id?: string;
-  companyName: string;
-  jobTitle: string;
-  startDate: string;
-  endDate: string;
-  jobDescription: string;
-}
+const UserAboutPage: React.FC = () => {
+  const { portfolioData } = useContext(PortfolioContext)!;
 
-interface UserAboutPageProps {
-  firstName: string;
-  lastName: string;
-  education: Education[];
-  experience: ProfessionalExperience[];
-}
-
-const UserAboutPage: React.FC<UserAboutPageProps> = ({
-  firstName,
-  lastName,
-  education,
-  experience,
-}) => {
-  const fullName = `${firstName} ${lastName}`;
+  const fullName = `${portfolioData?.firstName || ''} ${portfolioData?.lastName || ''}`;
+  const education = portfolioData?.education || [];
+  const experience = portfolioData?.experience || [];
 
   const formatDate = (dateString: string) => {
     if (!dateString) return 'Present';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long' 
-    });
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">
-      <UserNavbar />
+     
       
       <div className="max-w-6xl mx-auto px-6 py-12">
         

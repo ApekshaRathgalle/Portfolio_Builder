@@ -65,6 +65,7 @@ const PortfolioForm: React.FC = () => {
 
 
   const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const { setPortfolioData } = useContext(PortfolioContext)!;
   const navigate = useNavigate();
 
@@ -74,6 +75,13 @@ const PortfolioForm: React.FC = () => {
       [field]: value
     }));
   };
+
+  const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  if (e.target.files && e.target.files[0]) {
+    setResumeFile(e.target.files[0]);
+  }
+};
+
 
   const handleArrayFieldChange = (
     arrayName: 'education' | 'experience' | 'projects',
@@ -125,19 +133,22 @@ const PortfolioForm: React.FC = () => {
 
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (profilePhoto) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPortfolioData({ ...formData, profilePhoto: reader.result as string });
-        navigate('/user');
-      };
-      reader.readAsDataURL(profilePhoto);
-    } else {
-      setPortfolioData({ ...formData, profilePhoto: undefined });
-      navigate('/user');
-    }
+  e.preventDefault();
+  const saveData = (resumeBase64?: string) => {
+    setPortfolioData({ ...formData, profilePhoto: profilePhoto ? profilePhoto.name : undefined, resume: resumeBase64 });
+    navigate('/user');
   };
+
+  if (resumeFile) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      saveData(reader.result as string);
+    };
+    reader.readAsDataURL(resumeFile);
+  } else {
+    saveData(undefined);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900 text-white">
@@ -248,6 +259,23 @@ const PortfolioForm: React.FC = () => {
                     </div>
                   </div>
                 </div>
+                <div className="md:col-span-2">
+  <label className="block mb-2 font-medium text-slate-200">Resume (PDF, optional)</label>
+  <div className="relative">
+    <input
+      type="file"
+      accept="application/pdf"
+      onChange={handleResumeChange}
+      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+    />
+    <div className="flex items-center justify-center p-10 border-2 border-dashed border-purple-500/50 rounded-xl bg-slate-900/50 hover:border-purple-400 hover:bg-purple-400/10 transition-all">
+      <span className="text-slate-300">
+        {resumeFile ? resumeFile.name : 'Click to upload or drag and drop your resume (PDF)'}
+      </span>
+    </div>
+  </div>
+</div>
+
                 <div className="md:col-span-2">
                   <label className="block mb-2 font-medium text-slate-200">Professional Summary/Bio</label>
                   <textarea
